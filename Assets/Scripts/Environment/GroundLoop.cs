@@ -1,41 +1,43 @@
+using System;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class GroundLoop : MonoBehaviour
 {
-    [SerializeField] private Transform ground1;
-    [SerializeField] private Transform ground2;
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private GameObject groundPrefab;
+    [SerializeField] private float speed = 5f;
 
-    private float groundWidth;
+    private bool hasSpawnedGround = false;
 
-    private void Start()
-    {
-        groundWidth = Mathf.Abs(ground2.position.x - ground1.position.x);
-    }
+    // Theo kích thước ground hiện tại
+    private float groundWidth = 9f;
 
     private void Update()
     {
-        // để mặt dất di chuyển sang bên trái 
-        ground1.Translate(Vector2.left * moveSpeed * Time.deltaTime);
-        ground2.Translate(Vector2.left * moveSpeed * Time.deltaTime);
+        transform.Translate(Vector3.left * speed * Time.deltaTime);
 
-        if (ground1.position.x <= -groundWidth)
+        // Khi Ground chạy đến X <= 1 thì tạo mảnh tiếp theo
+        if (transform.position.x <= 1f && !hasSpawnedGround)
         {
-            // đưa nó sang phía bên phải 
-            ground1.position = new Vector3(
-                ground2.position.x + groundWidth,
-                ground1.position.y,
-                ground1.position.z
+            Vector3 spawnPosition = new Vector3(
+                transform.position.x + groundWidth,
+                transform.position.y,
+                transform.position.z
             );
+
+            Instantiate(
+                groundPrefab,
+                spawnPosition,
+                Quaternion.identity
+            );
+
+            hasSpawnedGround = true;
         }
-         if (ground2.position.x <= -groundWidth)
+
+        // Ra xa bên trái thì xóa
+        if (transform.position.x < -20f)
         {
-            // đưa nó sang phía bên phải 
-            ground2.position = new Vector3(
-                ground1.position.x + groundWidth,
-                ground2.position.y,
-                ground2.position.z
-            );
+            Destroy(gameObject);
         }
     }
 }
