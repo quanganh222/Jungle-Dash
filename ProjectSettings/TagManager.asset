@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Obstacle
+    uniqueID: 2061996629
+    locked: 0
+  - name: Player
+    uniqueID: 304184321
+    locked: 0
   m_RenderingLayers:
   - Default
   m_MigratedRenderPipelines: []
