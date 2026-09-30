@@ -3,13 +3,13 @@ guid: d2e1dc4851c50c245a84657e68b670bf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3878557786174838139
-    second: ground_0
+      213: 6682738439518977790
+    second: Ground_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -40,18 +40,18 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ground_0
+      name: Ground_0
       rect:
         serializedVersion: 2
-        x: 23
-        y: 24
-        width: 48
-        height: 40
+        x: 0
+        y: 0
+        width: 384
+        height: 53
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58a29323e389c2ac0800000000000000
-      internalID: -3878557786174838139
+      spriteID: efe706e343bddbc50800000000000000
+      internalID: 6682738439518977790
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1a637437a8c106e46b826da18809c8a0
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ground_0: -3878557786174838139
+      Ground_0: 6682738439518977790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
