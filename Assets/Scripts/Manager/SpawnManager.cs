@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
 
     // Bộ đếm thời gian
     private float timer = 0f;
-    private float nextSpawnInterval = 1.5f;
+    [SerializeField] private float nextSpawnInterval = 1.5f;
 
     private void Update()
     {
