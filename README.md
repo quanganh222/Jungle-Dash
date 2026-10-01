@@ -55,8 +55,8 @@ Assets/
 ├── Prefabs/          # Prefab chướng ngại vật (Gai, Chim, Khúc cây)
 ├── Scenes/           # Scene Gameplay chính
 ├── Scripts/
-│   ├── Manager/      # GameManager.cs, Spawner.cs
+│   ├── Environment/  # GroundLoop.cs
+│   ├── Manager/      # GameManager.cs, Spawner.cs, Obstacle.cs
 │   ├── Player/       # PlayerController.cs
-│   ├── UI/           # MainMenuUI.cs, GameOverUI.cs
-│   └── Obstacle/     # Obstacle.cs
+│   └── UI/           # MainMenuUI.cs
 └── Sprites/          # Sprite 2D (Player, Tileset, Background)
