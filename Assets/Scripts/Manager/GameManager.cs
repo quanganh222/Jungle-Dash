@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement; // Bắt buộc phải có dòng này để load Scene
-
+using UnityEngine.SceneManagement; 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
