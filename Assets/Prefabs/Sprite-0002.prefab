@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1097376545245769864}
   - component: {fileID: 689583615646774659}
-  - component: {fileID: 5746538732297522056}
   - component: {fileID: 6101367809225944201}
+  - component: {fileID: 3043799194826013754}
   m_Layer: 0
   m_Name: Sprite-0002
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,8 +94,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &5746538732297522056
-BoxCollider2D:
+--- !u!114 &6101367809225944201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242107323773217735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6179d86b824ff4ead589676970ca2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  leftBoundary: -10
+--- !u!60 &3043799194826013754
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,7 +141,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -2, y: 1}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 2, y: -1}
@@ -138,19 +151,21 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.3333335, y: 0.66666675}
-  m_EdgeRadius: 0
---- !u!114 &6101367809225944201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242107323773217735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb6179d86b824ff4ead589676970ca2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
-  leftBoundary: -10
-  gameSpeed: 1
+  m_Points:
+    m_Paths:
+    - - {x: -2.6531477, y: 0.94747066}
+      - {x: -2.6666667, y: 0.6666667}
+      - {x: -1.4678825, y: 0.68588823}
+      - {x: -1.4390574, y: 0.86274004}
+      - {x: -1.5107555, y: 0.82560563}
+      - {x: -1.5047464, y: 0.94722605}
+      - {x: -1.5219177, y: 1.0006119}
+      - {x: -1.5639448, y: 1.0172558}
+      - {x: -1.7164955, y: 1.029481}
+      - {x: -1.7650518, y: 1.2040923}
+      - {x: -1.8612299, y: 1.1781178}
+      - {x: -1.9990013, y: 1.1263038}
+      - {x: -2.1177893, y: 1.0861382}
+      - {x: -2.367733, y: 1.0531285}
+      - {x: -2.5299327, y: 0.99240375}
+  m_UseDelaunayMesh: 1

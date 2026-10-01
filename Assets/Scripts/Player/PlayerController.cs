@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
         // Xử lý hành động Nhảy và Cúi
         HandleJump();
         HandleDuck();
+        HandleSoundEffect();
     }
 
     // Hàm kiểm tra nhân vật có đang đứng trên mặt đất hay không
@@ -70,18 +71,42 @@ public class PlayerController : MonoBehaviour
     // Xử lý logic Cúi người
     private void HandleDuck()
     {
-        // Khi GIỮ phím Mũi tên xuống
         if (Keyboard.current.downArrowKey.isPressed)
         {
             boxcollider.enabled = false;        // Tắt collider đứng
             capsulecollider.enabled = true;     // Bật collider cúi (thu nhỏ hitbox)
             ani.SetBool("IsDuck", true);         // Kích hoạt Animation cúi
         }
-        else // Khi THẢ phím Mũi tên xuống (trở về trạng thái bình thường)
+        else
         {
             boxcollider.enabled = true;         // Bật lại collider đứng
             capsulecollider.enabled = false;    // Tắt collider cúi
             ani.SetBool("IsDuck", false);        // Tắt Animation cúi
+        }
+    }
+
+    private void HandleSoundEffect()
+    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
+        {
+            AudioManager.instance.PlayJumpClip();
+        }
+        if (isGrounded && !AudioManager.instance.HasPlayEffectSound())
+        {
+            AudioManager.instance.PlayTapClip();
+            AudioManager.instance.SetHasPlayEffectSound(true);
+        }
+        else if (!isGrounded)
+        {
+            AudioManager.instance.SetHasPlayEffectSound(false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Obstacle"))
+        {
+            AudioManager.instance.PlayHurtClip();
         }
     }
 }

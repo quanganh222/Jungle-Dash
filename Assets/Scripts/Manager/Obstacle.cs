@@ -24,4 +24,14 @@ public class Obstacle : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    // Xử lý va chạm 2D khi Player đụng vào chướng ngại vật
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Kiểm tra nếu đối tượng va chạm có Tag là "Player"
+        if(collision.CompareTag("Player"))
+        {
+            GameManager.instance.GameOver();
+        }
+    }
 }

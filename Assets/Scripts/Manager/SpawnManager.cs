@@ -2,43 +2,98 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Obstacles; // Mảng chứa các Prefab chướng ngại vật (0, 1: Xương rồng; 2: Chim)
-    [SerializeField] private Transform highPos;    // Vị trí xuất hiện trên cao
-    [SerializeField] private Transform lowPos;     // Vị trí xuất hiện dưới thấp
-    [SerializeField] private float spawnRate = 2f; // Khoảng thời gian giữa các lần tạo vật thể (giây)
-    private float timer = 0;                       // Biến tích lũy thời gian
+    [SerializeField] private GameObject[] obstacles;
+    [SerializeField] private Transform lowPos;   // Vị trí thấp (Dành cho Bẫy, Thân cây, Chim tầm thấp)
+    [SerializeField] private Transform midPos;   // Vị trí tầm trung (Chim tầm trung)
+    [SerializeField] private Transform highPos;  // Vị trí tầm cao (Chim tầm cao)
+    [SerializeField] private float lowBirdYOffset = -0.8f;
+
+    // Bộ đếm thời gian
+    private float timer = 0f;
+    private float nextSpawnInterval = 1.5f;
 
     private void Update()
     {
-        // Cộng dồn thời gian trôi qua của từng khung hình
         timer += Time.deltaTime;
 
-        // Khi đủ thời gian quy định thì tiến hành tạo vật thể
-        if (timer >= spawnRate)
+        // Khi đủ thời gian thì sinh ra chướng ngại vật mới
+        if (timer >= nextSpawnInterval)
         {
             SpawnObstacle();
-            timer = 0; // Reset lại bộ đếm
+            timer = 0f; // Reset bộ đếm
         }
     }
 
-    // Hàm tạo ngẫu nhiên chướng ngại vật
+    // Hàm xử lý logic sinh chướng ngại vật theo giai đoạn điểm số
     private void SpawnObstacle()
     {
-        // Kiểm tra an toàn: nếu mảng rỗng thì không chạy tiếp
-        if (Obstacles == null || Obstacles.Length == 0) return;
+        // Kiểm tra an toàn: GameManager phải tồn tại và mảng obstacles phải đủ 3 phần tử
+        if (GameManager.instance == null || obstacles.Length < 3) return;
 
-        // Lấy chỉ số ngẫu nhiên từ 0 đến Obstacles.Length - 1
-        int index = Random.Range(0, Obstacles.Length);
+        float currentScore = GameManager.instance.GetScore();
 
-        // Trường hợp vật thể 0 hoặc 1 -> Sinh ra ở vị trí thấp (lowPos)
-        if (index == 0 || index == 1)
+        // Biến cấu hình nhịp độ game theo từng giai đoạn
+        float minTime = 2.5f, maxTime = 4.0f;
+        int birdChance = 0;              // Tỉ lệ xuất hiện Chim (%)
+        bool allowTreeTrunk = false;     // Cho phép xuất hiện Thân cây gãy
+
+        //Cấu hình độ khó game 
+        if (currentScore < 100) // GIAI ĐOẠN 1: Mới vào game (Dễ)
         {
-            GameObject Obstacle = Instantiate(Obstacles[index], lowPos.position, Quaternion.identity);
+            minTime = 2.5f; maxTime = 4.0f;
+            birdChance = 0;
+            allowTreeTrunk = false; // Chỉ xuất hiện Bẫy đơn giản
         }
-        // Trường hợp vật thể 2 -> Sinh ra ở vị trí cao (highPos)
-        else if (index == 2)
+        else if (currentScore < 300) // GIAI ĐOẠN 2: Tăng tốc nhẹ
         {
-            GameObject Obstacle = Instantiate(Obstacles[index], highPos.position, Quaternion.identity);
+            minTime = 1.8f; maxTime = 3.0f;
+            birdChance = 10;
+            allowTreeTrunk = true;  // Bắt đầu xuất hiện Thân cây gãy
+        }
+        else if (currentScore < 600) // GIAI ĐOẠN 3: Tốc độ cao
+        {
+            minTime = 1.2f; maxTime = 2.2f;
+            birdChance = 25;
+            allowTreeTrunk = true;
+        }
+        else // GIAI ĐOẠN 4: Thử thách cực đại (600+ điểm)
+        {
+            minTime = 0.8f; maxTime = 1.5f;
+            birdChance = 40;
+            allowTreeTrunk = true;
+        }
+
+        // Tính toán khoảng thời gian ngẫu nhiên cho lần spawn kế tiếp
+        nextSpawnInterval = Random.Range(minTime, maxTime);
+        int randomRate = Random.Range(0, 100);
+        if (randomRate < birdChance) 
+        {
+            Transform chosenPos = lowPos;
+            int posRand = Random.Range(0, 3);
+
+            if (posRand == 1 && midPos != null) chosenPos = midPos;
+            else if (posRand == 2 && highPos != null) chosenPos = highPos;
+
+            // Lấy tọa độ gốc
+            Vector3 spawnPosition = chosenPos.position;
+
+            // Nếu chim xuất hiện ở vị trí lowPos thì hạ thấp Y xuống theo lowBirdYOffset
+            if (chosenPos == lowPos)
+            {
+                spawnPosition.y += lowBirdYOffset;
+            }
+
+            Instantiate(obstacles[2], spawnPosition, Quaternion.identity);
+        }
+        else 
+        {
+            int groundIndex = 0;
+            if (allowTreeTrunk)
+            {
+                groundIndex = Random.Range(0, 2); 
+            }
+
+            Instantiate(obstacles[groundIndex], lowPos.position, Quaternion.identity);
         }
     }
 }

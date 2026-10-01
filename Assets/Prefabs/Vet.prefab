@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8387730537397240973}
   - component: {fileID: 8311291814961220742}
-  - component: {fileID: 1326661924616435473}
   - component: {fileID: 2255027592213056758}
   - component: {fileID: 1971756187063651659}
+  - component: {fileID: -2455618879025332655}
   m_Layer: 0
   m_Name: Vet
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,43 +95,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!70 &1326661924616435473
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488090246750632456}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.41262487, y: 2.2002602}
-  m_Size: {x: 1.2997504, y: 0.6989828}
-  m_Direction: 1
 --- !u!95 &2255027592213056758
 Animator:
   serializedVersion: 7
@@ -167,4 +130,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle
   leftBoundary: -10
-  gameSpeed: 1
+--- !u!60 &-2455618879025332655
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488090246750632456}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.8292683, y: -2.6818182}
+    oldSize: {x: 1.28125, y: 0.6875}
+    newSize: {x: 1.28125, y: 0.6875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.9946556, y: 2.295848}
+      - {x: -1.0549612, y: 2.1184187}
+      - {x: -0.93559265, y: 1.9904202}
+      - {x: -0.6552925, y: 2.14905}
+      - {x: -0.5509958, y: 1.9710822}
+      - {x: -0.32119656, y: 1.8839868}
+      - {x: -0.20670986, y: 1.8705736}
+      - {x: -0.07513523, y: 1.9066727}
+      - {x: -0.023052216, y: 1.8633714}
+      - {x: 0.0194664, y: 1.8814412}
+      - {x: 0.015191078, y: 1.9510735}
+      - {x: 0.11797333, y: 2.097731}
+      - {x: 0.14336681, y: 2.28125}
+      - {x: 0.21875, y: 2.53125}
+      - {x: 0.022709846, y: 2.4520981}
+      - {x: -0.40625, y: 2.4897895}
+      - {x: -0.612875, y: 2.3594449}
+  m_UseDelaunayMesh: 1
