@@ -4,6 +4,13 @@
 
 ---
 
+## 👨‍💻 Thông Tin Sinh Viên thực hiện
+- **Họ và tên:** Nguyễn Quang Anh
+- **Tên dự án:** Jungle-Dash
+- **Công cụ phát triển:** Unity 6 (Version `6000.5.6f1`), C# / Visual Studio
+
+---
+
 ## 🚀 Tính Năng Nổi Bật (Features)
 
 * **Hệ thống di chuyển & Hitbox linh hoạt:**
@@ -41,8 +48,25 @@
 
 | Thao tác | Phím bấm (Keyboard) | Chức năng |
 | :--- | :--- | :--- |
-| **Nhảy (Jump)** | `Space` | Nhảy lên cao để né chướng ngại vật mặt đất |
+| **Nhảy (Jump)** | `Space` / `Mũi tên lên` | Nhảy lên cao để né chướng ngại vật mặt đất |
 | **Cúi (Duck)** | `Mũi tên xuống (Down Arrow)` | Cúi người xuống để thu nhỏ Hitbox né chướng ngại vật tầm cao |
+
+---
+
+## 🏃 Hướng Dẫn Chạy Game (How to Run)
+
+### Cách 1: Chạy trực tiếp từ Bản Build (.exe)
+1. Giải nén thư mục/file nén Build (`Build_Windows.zip`).
+2. Mở thư mục vừa giải nén và chạy file thực thi **`Jungle-Dash.exe`**.
+3. Trải nghiệm game ngay mà không cần cài đặt Unity.
+
+### Cách 2: Chạy từ Source Code trong Unity Editor
+1. Tải về và giải nén file nén dự án **`Jungle-Dash.zip`**.
+2. Mở **Unity Hub** -> Bấm vào nút **Add** (hoặc **Open**) -> Chọn đường dẫn tới thư mục project `Jungle-Dash` vừa giải nén.
+3. Chờ Unity nạp dữ liệu và tải các thư mục cần thiết (`Library` sẽ tự động khởi tạo lại).
+4. Tại cửa sổ **Project Browser**, truy cập theo đường dẫn: `Assets/Scenes/`.
+5. Mở scene **`MainMenu.unity`** (hoặc `Gameplay.unity`).
+6. Bấm nút **Play (▶)** ở phía trên đỉnh giao diện Unity để bắt đầu chạy thử game.
 
 ---
 
@@ -53,7 +77,7 @@ Assets/
 ├── Animations/       # Animation Controller & Clips (Walk, Duck, Jump)
 ├── Audio/            # Background Music & Sound Effects (.wav / .mp3)
 ├── Prefabs/          # Prefab chướng ngại vật (Gai, Chim, Khúc cây)
-├── Scenes/           # Scene Gameplay chính
+├── Scenes/           # Scene Gameplay chính & MainMenu
 ├── Scripts/
 │   ├── Environment/  # GroundLoop.cs
 │   ├── Manager/      # GameManager.cs, Spawner.cs, Obstacle.cs
