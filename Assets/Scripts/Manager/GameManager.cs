@@ -6,23 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [Header("--- UI REFERENCES ---")]
     [SerializeField] private TextMeshProUGUI scoreText;       
     [SerializeField] private TextMeshProUGUI highScoreText;   
     [SerializeField] private GameObject gameOver;            
 
-    [Header("--- GAME SETTINGS ---")]
     private float gameSpeed = 5f; 
     private float score = 0f;
-
-    // Biến tĩnh lưu điểm kỷ lục trong 1 phiên chơi
     private static int sessionHighScore = 0; 
     
     private bool isGameOver = false;
 
-    /// <summary>
-    /// TỰ ĐỘNG CHẠY MỖI LẦN MỞ GAME (Hoặc khi bấm nút Play trong Unity)
-    /// </summary>
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void ResetDataOnGameLaunch()
     {
