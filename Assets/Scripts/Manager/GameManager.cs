@@ -1,17 +1,41 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private TextMeshProUGUI scoreText; 
-    [SerializeField] private GameObject scoreTextObject;
-    [SerializeField] private GameObject gameOver;        // Panel GameOver chứa 2 nút Restart & Exit
 
-    [Header("Game Settings")]
+    [Header("--- UI REFERENCES ---")]
+    [SerializeField] private TextMeshProUGUI scoreText;       
+    [SerializeField] private TextMeshProUGUI highScoreText;   
+    [SerializeField] private GameObject gameOver;            
+
+    [Header("--- GAME SETTINGS ---")]
     private float gameSpeed = 5f; 
-    private float score = 0;      
+    private float score = 0f;
+
+    // Biến tĩnh lưu điểm kỷ lục trong 1 phiên chơi
+    private static int sessionHighScore = 0; 
+    
     private bool isGameOver = false;
+
+    /// <summary>
+    /// TỰ ĐỘNG CHẠY MỖI LẦN MỞ GAME (Hoặc khi bấm nút Play trong Unity)
+    /// </summary>
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void ResetDataOnGameLaunch()
+    {
+        // 1. Đưa điểm kỷ lục phiên chơi về 0
+        sessionHighScore = 0;
+
+        // 2. Xóa sạch file lưu số 105 cũ dính trên ổ cứng máy tính
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            PlayerPrefs.DeleteKey("HighScore");
+            PlayerPrefs.Save();
+        }
+    }
 
     private void Awake()
     {
@@ -37,10 +61,23 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f; 
         isGameOver = false;
-        score = 0;
+        score = 0f;
 
-        if (scoreTextObject != null) scoreTextObject.SetActive(true);
-        if (gameOver != null) gameOver.SetActive(false); // Mới vào game thì ẩn GameOver panel
+        // Bật và hiển thị Score: 000000 ban đầu
+        if (scoreText != null) 
+        {
+            scoreText.gameObject.SetActive(true);
+            scoreText.text = "Score: " + 0.ToString("D6");
+        }
+
+        // Bật và hiển thị High Score hiện tại (Mới mở game sẽ là HI: 000000)
+        if (highScoreText != null) 
+        {
+            highScoreText.gameObject.SetActive(true);
+            UpdateHighScoreUI();
+        }
+
+        if (gameOver != null) gameOver.SetActive(false); 
     }
 
     private void UpdateGameSpeed()
@@ -53,31 +90,47 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScore()
     {
-        score += Time.deltaTime * 10;
-        if (scoreText != null) scoreText.text = "Score: " + Mathf.FloorToInt(score);
+        score += Time.deltaTime * 10f;
+        int currentScore = Mathf.FloorToInt(score);
+
+        if (scoreText != null) scoreText.text = "Score: " + currentScore.ToString("D6");
+
+        // Nếu điểm lượt chơi này cao hơn High Score -> Cập nhật High Score
+        if (currentScore > sessionHighScore)
+        {
+            sessionHighScore = currentScore;
+            UpdateHighScoreUI();
+        }
+    }
+
+    private void UpdateHighScoreUI()
+    {
+        if (highScoreText != null)
+        {
+            highScoreText.text = "HI: " + sessionHighScore.ToString("D6");
+        }
     }
 
     public float GetGameSpeed() => gameSpeed;
     public float GetScore() => score;
 
-    // Gọi khi nhân vật chết
     public void GameOver() 
     {
         isGameOver = true;
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
 
-        if (scoreTextObject != null) scoreTextObject.SetActive(false);
+        if (scoreText != null) scoreText.gameObject.SetActive(false);
+        if (highScoreText != null) highScoreText.gameObject.SetActive(false);
         if (gameOver != null) gameOver.SetActive(true); 
     }
 
-    // Gọi khi bấm nút Restart 
+    // Khi chết bấm Restart -> Load lại Scene nhưng High Score VẪN GIỮ ĐƯỢC
     public void RestartGame()
     {
         Time.timeScale = 1f; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // Gọi khi bấm nút Exit
     public void ExitToMainMenu()
     {
         Time.timeScale = 1f; 
